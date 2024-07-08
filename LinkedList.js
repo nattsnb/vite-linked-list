@@ -63,6 +63,7 @@ export class LinkedList {
       nextElement,
       previousElement,
     );
+    newMember.value = value
     previousElement.nextMember = newMember;
     nextElement.previousMember = newMember;
   }
