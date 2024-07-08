@@ -37,13 +37,16 @@ export class LinkedList {
             this.#tail = newTail
         }
     }
-    reverse() {
-        if(this.#head !== this.#tail){
-            const newHead = this.#head.nextMember
-            this.#head = this.#tail
-            this.#head
-            this.#tail.previousMember = this.#tail
 
+    reverse = () => {
+        if(this.#tail && this.#head !== this.#tail){
+            const arrayFromList = this.toArray()
+            arrayFromList.reverse()
+            const reversedList = new LinkedList()
+            for (const element of arrayFromList) {
+                reversedList.addToTail(element.value)
+            }
+            return reversedList
         }
     }
     switchPositions(leftElement, rightElement) {
