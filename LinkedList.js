@@ -57,8 +57,7 @@ export class LinkedList {
     leftElement.previousMember = rightElement;
     rightElement.nextMember = leftElement;
   }
-  addBetween(previousElement, nextElement) {
-    const value = Math.floor(Math.random() * 100);
+  addBetween(previousElement, nextElement, value) {
     const newMember = new LinkedListElement(
       value,
       nextElement,
