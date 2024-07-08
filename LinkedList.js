@@ -37,8 +37,28 @@ export class LinkedList {
             this.#tail = newTail
         }
     }
-    reverse() {}
-    switchPositions(leftElement, rightElement) {}
-    addBetween(previousElement, nextElement) {}
+    reverse() {
+        if(this.#head !== this.#tail){
+            const newHead = this.#head.nextMember
+            this.#head = this.#tail
+            this.#head
+            this.#tail.previousMember = this.#tail
+
+        }
+    }
+    switchPositions(leftElement, rightElement) {
+        rightElement.nextMember.previousMember = leftElement
+        leftElement.previousMember.nextMember = rightElement
+        rightElement.previousMember = leftElement.previousMember
+        leftElement.nextMember = rightElement.nextMember
+        leftElement.previousMember = rightElement
+        rightElement.nextMember = leftElement
+    }
+    addBetween(previousElement, nextElement) {
+        const value = Math.floor(Math.random()*100)
+        const newMember = new LinkedListElement(value, nextElement, previousElement)
+        previousElement.nextMember = newMember
+        nextElement.previousMember = newMember
+    }
 }
 
