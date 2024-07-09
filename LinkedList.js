@@ -30,12 +30,10 @@ export class LinkedList {
     return array;
   }
 
-  remove() {
-    if (this.#tail !== null) {
-      const newTail = this.#tail.previousMember;
-      newTail.nextMember = null;
-      this.#tail = newTail;
-    }
+  remove(elementNumber) {
+    const elementToRemove = this.getNthElement(elementNumber)
+    elementToRemove.nextMember.previousMember = elementToRemove.previousMember
+    elementToRemove.previousMember.nextMember = elementToRemove.nextMember
   }
 
   reverse = () => {

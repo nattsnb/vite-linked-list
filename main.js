@@ -10,4 +10,5 @@ list.addToTail(67);
 list.addToTail(78);
 list.addToTail(99);
 console.log(list.toArray())
-console.log(list.getNthElement(3))
+list.remove(3)
+console.log(list.toArray())
