@@ -10,5 +10,5 @@ list.addToTail(67);
 list.addToTail(78);
 list.addToTail(99);
 console.log(list.toArray())
-list.remove(3)
+list.switchPositions(3,4)
 console.log(list.toArray())

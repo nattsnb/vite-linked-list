@@ -47,7 +47,9 @@ export class LinkedList {
       return reversedList;
     }
   };
-  switchPositions(leftElement, rightElement) {
+  switchPositions(leftElementNumber, rightElementNumber) {
+    const rightElement = this.getNthElement(rightElementNumber)
+    const leftElement = this.getNthElement((leftElementNumber))
     rightElement.nextMember.previousMember = leftElement;
     leftElement.previousMember.nextMember = rightElement;
     rightElement.previousMember = leftElement.previousMember;
