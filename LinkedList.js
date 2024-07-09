@@ -67,4 +67,11 @@ export class LinkedList {
     previousElement.nextMember = newMember;
     nextElement.previousMember = newMember;
   }
+  getNthElement (elementNumber) {
+    let element = this.#head;
+    for (let i = 0; i < elementNumber-1; i ++){
+      element = element.nextMember
+    }
+    return element
+  }
 }
