@@ -31,9 +31,9 @@ export class LinkedList {
   }
 
   remove(elementNumber) {
-    const elementToRemove = this.getNthElement(elementNumber)
-    elementToRemove.nextMember.previousMember = elementToRemove.previousMember
-    elementToRemove.previousMember.nextMember = elementToRemove.nextMember
+    const elementToRemove = this.getNthElement(elementNumber);
+    elementToRemove.nextMember.previousMember = elementToRemove.previousMember;
+    elementToRemove.previousMember.nextMember = elementToRemove.nextMember;
   }
 
   reverse = () => {
@@ -48,32 +48,45 @@ export class LinkedList {
     }
   };
   switchPositions(leftElementNumber, rightElementNumber) {
-    const rightElement = this.getNthElement(rightElementNumber)
-    const leftElement = this.getNthElement((leftElementNumber))
-    rightElement.nextMember.previousMember = leftElement;
-    leftElement.previousMember.nextMember = rightElement;
-    rightElement.previousMember = leftElement.previousMember;
-    leftElement.nextMember = rightElement.nextMember;
-    leftElement.previousMember = rightElement;
-    rightElement.nextMember = leftElement;
+    const rightElement = this.getNthElement(rightElementNumber);
+    const leftElement = this.getNthElement(leftElementNumber);
+    if (rightElementNumber - leftElementNumber === 1) {
+      rightElement.nextMember.previousMember = leftElement;
+      leftElement.previousMember.nextMember = rightElement;
+      rightElement.previousMember = leftElement.previousMember;
+      leftElement.nextMember = rightElement.nextMember;
+      leftElement.previousMember = rightElement;
+      rightElement.nextMember = leftElement;
+    } else {
+      rightElement.nextMember.previousMember = leftElement;
+      rightElement.previousMember.nextMember = leftElement;
+      leftElement.nextMember.previousMember = rightElement;
+      leftElement.previousMember.nextMember = rightElement;
+      const rightElementPreviousMemberSaved = rightElement.previousMember;
+      const leftElementNextMemberSaved = leftElement.nextMember;
+      rightElement.previousMember = leftElement.previousMember;
+      leftElement.nextMember = rightElement.nextMember;
+      leftElement.previousMember = rightElementPreviousMemberSaved;
+      rightElement.nextMember = leftElementNextMemberSaved;
+    }
   }
   addBetween(previousElementNumber, nextElementNumber, value) {
-    const previousElement = this.getNthElement(previousElementNumber)
-    const nextElement = this.getNthElement(nextElementNumber)
+    const previousElement = this.getNthElement(previousElementNumber);
+    const nextElement = this.getNthElement(nextElementNumber);
     const newMember = new LinkedListElement(
       value,
       nextElement,
       previousElement,
     );
-    newMember.value = value
+    newMember.value = value;
     previousElement.nextMember = newMember;
     nextElement.previousMember = newMember;
   }
-  getNthElement (elementNumber) {
+  getNthElement(elementNumber) {
     let element = this.#head;
-    for (let i = 0; i < elementNumber-1; i ++){
-      element = element.nextMember
+    for (let i = 0; i < elementNumber - 1; i++) {
+      element = element.nextMember;
     }
-    return element
+    return element;
   }
 }
