@@ -57,7 +57,9 @@ export class LinkedList {
     leftElement.previousMember = rightElement;
     rightElement.nextMember = leftElement;
   }
-  addBetween(previousElement, nextElement, value) {
+  addBetween(previousElementNumber, nextElementNumber, value) {
+    const previousElement = this.getNthElement(previousElementNumber)
+    const nextElement = this.getNthElement(nextElementNumber)
     const newMember = new LinkedListElement(
       value,
       nextElement,
