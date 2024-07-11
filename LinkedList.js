@@ -86,11 +86,25 @@ export class LinkedList {
       nextElement.previousMember = newMember;
     }
   }
-  getNthElement(element) {
-    let member = this.#head;
-    for (let i = 0; i < element - 1; i++) {
-      member = element.nextMember;
+  getNthElement=(number)=> {
+    if (number <= this.getLengthOfList()){
+      let member = this.#head;
+      for (let i = 0; i < number- 1; i++) {
+        member = member.nextMember;
+      }
+      return member;
     }
-    return memeber;
+  }
+  getLengthOfList(){
+    let count = 0
+    if (this.#head){
+      count = count + 1
+      let member = this.#head
+      while (member.nextMember !== null) {
+          count = count + 1
+          member = member.nextMember
+      }
+    }
+    return count
   }
 }
