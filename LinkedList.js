@@ -93,6 +93,8 @@ export class LinkedList {
         member = member.nextMember;
       }
       return member;
+    } else {
+      return "number is too high"
     }
   }
   getLengthOfList(){
