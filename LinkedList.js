@@ -73,7 +73,7 @@ export class LinkedList {
     }
   }
   addBetween(previousElement, nextElement, value) {
-    if (this.#head !== this.#tail) {
+    if (this.#head !== this.#tail && previousElement.nextMember === nextElement) {
       const previousElement = previousElement;
       const nextElement = nextElement;
       const newMember = new LinkedListElement(
