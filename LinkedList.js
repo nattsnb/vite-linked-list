@@ -47,11 +47,11 @@ export class LinkedList {
       return reversedList;
     }
   };
-  switchPositions(leftElementNumber, rightElementNumber) {
+  switchPositions(leftElement, rightElement) {
     if (this.#head !== this.#tail) {
-      const rightElement = this.getNthElement(rightElementNumber);
-      const leftElement = this.getNthElement(leftElementNumber);
-      if (rightElementNumber - leftElementNumber === 1) {
+      const rightElement = rightElement;
+      const leftElement = leftElement;
+      if (rightElement - leftElement === 1) {
         rightElement.nextMember.previousMember = leftElement;
         leftElement.previousMember.nextMember = rightElement;
         rightElement.previousMember = leftElement.previousMember;
@@ -72,10 +72,10 @@ export class LinkedList {
       }
     }
   }
-  addBetween(previousElementNumber, nextElementNumber, value) {
+  addBetween(previousElement, nextElement, value) {
     if (this.#head !== this.#tail) {
-      const previousElement = this.getNthElement(previousElementNumber);
-      const nextElement = this.getNthElement(nextElementNumber);
+      const previousElement = previousElement;
+      const nextElement = nextElement;
       const newMember = new LinkedListElement(
         value,
         nextElement,
@@ -86,11 +86,11 @@ export class LinkedList {
       nextElement.previousMember = newMember;
     }
   }
-  getNthElement(elementNumber) {
-    let element = this.#head;
-    for (let i = 0; i < elementNumber - 1; i++) {
-      element = element.nextMember;
+  getNthElement(element) {
+    let member = this.#head;
+    for (let i = 0; i < element - 1; i++) {
+      member = element.nextMember;
     }
-    return element;
+    return memeber;
   }
 }
