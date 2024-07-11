@@ -38,13 +38,14 @@ export class LinkedList {
 
   reverse = () => {
     if (this.#tail && this.#head !== this.#tail) {
-      let reversedList = new LinkedList();
-      let currentMember = this.#tail;
-      while (currentMember !== null) {
-        reversedList.addToTail(currentMember.value);
-        currentMember = currentMember.previousMember;
+      let previous = null;
+      while (this.#head !== null) {
+        let next = this.#head.nextMember;
+        this.#head.nextMember = previous;
+        previous = this.#head;
+        this.#head = next;
       }
-      return reversedList;
+      return previous;
     }
   };
   switchPositions(leftElement, rightElement) {
@@ -73,7 +74,10 @@ export class LinkedList {
     }
   }
   addBetween(previousElement, nextElement, value) {
-    if (this.#head !== this.#tail && previousElement.nextMember === nextElement) {
+    if (
+      this.#head !== this.#tail &&
+      previousElement.nextMember === nextElement
+    ) {
       const previousElement = previousElement;
       const nextElement = nextElement;
       const newMember = new LinkedListElement(
@@ -86,27 +90,27 @@ export class LinkedList {
       nextElement.previousMember = newMember;
     }
   }
-  getNthElement=(number)=> {
-    if (number <= this.getLengthOfList()){
+  getNthElement = (number) => {
+    if (number <= this.getLengthOfList()) {
       let member = this.#head;
-      for (let i = 0; i < number- 1; i++) {
+      for (let i = 0; i < number - 1; i++) {
         member = member.nextMember;
       }
       return member;
     } else {
-      return "number is too high"
+      return "number is too high";
     }
-  }
-  getLengthOfList(){
-    let count = 0
-    if (this.#head){
-      count = count + 1
-      let member = this.#head
+  };
+  getLengthOfList() {
+    let count = 0;
+    if (this.#head) {
+      count = count + 1;
+      let member = this.#head;
       while (member.nextMember !== null) {
-          count = count + 1
-          member = member.nextMember
+        count = count + 1;
+        member = member.nextMember;
       }
     }
-    return count
+    return count;
   }
 }
