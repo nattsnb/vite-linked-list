@@ -39,13 +39,16 @@ export class LinkedList {
   reverse = () => {
     if (this.#tail && this.#head !== this.#tail) {
       let previous = null;
+      const originalHead = this.#head
       while (this.#head !== null) {
         let next = this.#head.nextMember;
         this.#head.nextMember = previous;
+        this.#head.previousMember = next
         previous = this.#head;
         this.#head = next;
       }
-      return previous;
+      this.#tail = originalHead
+      this.#head = previous
     }
   };
   switchPositions(leftElement, rightElement) {
