@@ -31,31 +31,80 @@ export class LinkedList {
   }
 
   remove(elementNumber) {
-    const elementToRemove = this.getNthElement(elementNumber);
-    elementToRemove.nextMember.previousMember = elementToRemove.previousMember;
-    elementToRemove.previousMember.nextMember = elementToRemove.nextMember;
+    if (!isNaN(elementNumber) && elementNumber <= this.getLengthOfList()) {
+      const elementToRemove = this.getNthElement(elementNumber);
+      elementToRemove.nextMember.previousMember =
+        elementToRemove.previousMember;
+      elementToRemove.previousMember.nextMember = elementToRemove.nextMember;
+    }
   }
 
   reverse = () => {
     if (this.#tail && this.#head !== this.#tail) {
       let previous = null;
-      const originalHead = this.#head
+      const originalHead = this.#head;
       while (this.#head !== null) {
         let next = this.#head.nextMember;
         this.#head.nextMember = previous;
-        this.#head.previousMember = next
+        this.#head.previousMember = next;
         previous = this.#head;
         this.#head = next;
       }
-      this.#tail = originalHead
-      this.#head = previous
+      this.#tail = originalHead;
+      this.#head = previous;
     }
   };
   switchPositions(leftElement, rightElement) {
     if (this.#head !== this.#tail) {
-      const rightElement = rightElement;
-      const leftElement = leftElement;
-      if (rightElement - leftElement === 1) {
+      if (leftElement === this.#head && rightElement === this.#tail) {
+        const savedRightElementPreviousMember = rightElement.previousMember;
+        rightElement.previousMember = null;
+        rightElement.nextMember = leftElement.nextMember;
+        rightElement.nextMember.previousMember = rightElement;
+        leftElement.nextMember = null;
+        leftElement.previousMember = savedRightElementPreviousMember;
+        leftElement.previousMember.nextMember = leftElement;
+        this.#head = rightElement;
+        this.#tail = leftElement;
+      } else if (
+        leftElement === this.#head &&
+        leftElement.nextMember === rightElement
+      ) {
+        leftElement.nextMember = rightElement.nextMember;
+        rightElement.nextMember.previousMember = leftElement;
+        leftElement.previousMember = rightElement;
+        rightElement.previousMember = null;
+        rightElement.nextMember = leftElement;
+        this.#head = rightElement;
+      } else if (leftElement === this.#head) {
+        const savedLeftElementNextMember = leftElement.nextMember;
+        leftElement.nextMember = rightElement.nextMember;
+        leftElement.nextMember.previousMember = rightElement;
+        leftElement.previousMember = rightElement.previousMember;
+        leftElement.previousMember.nextMember = leftElement;
+        rightElement.previousMember = null;
+        rightElement.nextMember = savedLeftElementNextMember;
+        this.#head = rightElement;
+      } else if (
+        rightElement === this.#tail &&
+        leftElement.nextMember === rightElement
+      ) {
+        leftElement.previousMember.nextMember = rightElement;
+        rightElement.nextMember = leftElement;
+        rightElement.previousMember = leftElement.previousMember;
+        leftElement.previousMember = rightElement;
+        leftElement.nextMember = null;
+        this.#tail = leftElement;
+      } else if (rightElement === this.#tail) {
+        const savedRightElementPreviousMember = rightElement.previousMember;
+        rightElement.previousMember = leftElement.previousMember;
+        leftElement.previousMember.nextMember = rightElement;
+        rightElement.nextMember = leftElement.nextMember;
+        leftElement.nextMember.previousMember = rightElement;
+        leftElement.nextMember = null;
+        leftElement.previousMember = savedRightElementPreviousMember;
+        savedRightElementPreviousMember.nextMember = leftElement;
+      } else if (leftElement.nextMember === rightElement) {
         rightElement.nextMember.previousMember = leftElement;
         leftElement.previousMember.nextMember = rightElement;
         rightElement.previousMember = leftElement.previousMember;
@@ -81,8 +130,6 @@ export class LinkedList {
       this.#head !== this.#tail &&
       previousElement.nextMember === nextElement
     ) {
-      const previousElement = previousElement;
-      const nextElement = nextElement;
       const newMember = new LinkedListElement(
         value,
         nextElement,
