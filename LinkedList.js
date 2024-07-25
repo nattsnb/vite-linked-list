@@ -63,7 +63,7 @@ export class LinkedList {
     }
   };
   switchPositions(leftElement, rightElement) {
-    if (this.#head !== this.#tail) {
+    if (this.#head !== this.#tail && leftElement && rightElement) {
       if (leftElement === this.#head && rightElement === this.#tail) {
         const savedRightElementPreviousMember = rightElement.previousMember;
         rightElement.previousMember = null;

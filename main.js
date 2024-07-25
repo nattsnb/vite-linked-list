@@ -21,3 +21,18 @@ list.addToTail(99);
 // console.log(list.toArray())
 // list.remove("nanana")
 // console.log(list.toArray())
+
+// TESTING REVERSE FUNCTION
+// console.log(list.toArray())
+// list.reverse()
+// console.log(list.toArray())
+//
+// TESTING SWITCH POSITIONS FUNCTION
+// list.switchPositions(list.toArray()[0],list.toArray()[2])
+// console.log(list.toArray())
+// list.switchPositions(list.toArray()[1],list.toArray()[2])
+// console.log(list.toArray())
+// list.switchPositions(list.toArray()[3],list.toArray()[4])
+// console.log(list.toArray())
+// list.switchPositions(list.toArray()[3],list.toArray()[9])
+// console.log(list.toArray())
