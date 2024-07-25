@@ -33,9 +33,17 @@ export class LinkedList {
   remove(elementNumber) {
     if (!isNaN(elementNumber) && elementNumber <= this.getLengthOfList()) {
       const elementToRemove = this.getNthElement(elementNumber);
-      elementToRemove.nextMember.previousMember =
-        elementToRemove.previousMember;
-      elementToRemove.previousMember.nextMember = elementToRemove.nextMember;
+      if (elementToRemove.nextMember) {
+        elementToRemove.nextMember.previousMember =
+          elementToRemove.previousMember;
+      } else {
+        this.#tail = elementToRemove.previousMember;
+      }
+      if (elementToRemove.previousMember) {
+        elementToRemove.previousMember.nextMember = elementToRemove.nextMember;
+      } else {
+        this.#head = elementToRemove.nextMember;
+      }
     }
   }
 
