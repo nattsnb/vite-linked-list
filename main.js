@@ -36,3 +36,15 @@ list.addToTail(99);
 // console.log(list.toArray())
 // list.switchPositions(list.toArray()[3],list.toArray()[9])
 // console.log(list.toArray())
+
+// TESTING ADD BETWEEN FUNCTION
+// list.addBetween(list.toArray()[0],list.toArray()[2],68)
+// console.log(list.toArray())
+// list.addBetween(list.toArray()[0],list.toArray()[1],60)
+// console.log(list.toArray())
+// list.addBetween(list.toArray()[1],list.toArray()[2],71)
+// console.log(list.toArray())
+// list.addBetween(list.toArray()[5],list.toArray()[6],68)
+// console.log(list.toArray())
+// list.addBetween(list.toArray()[7],list.toArray()[8],666)
+// console.log(list.toArray())
