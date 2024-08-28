@@ -9,6 +9,40 @@ list.addToTail(5);
 list.addToTail(67);
 list.addToTail(78);
 list.addToTail(99);
+list.addToTail(34);
+list.addToTail(9);
+
+console.log(list.toArray());
+list.remove(6);
+console.log("REMOVE last");
+console.log(list.toArray());
+list.reverse();
+console.log("REVERSE");
+console.log(list.toArray());
+list.switchPositions(list.toArray()[0], list.toArray()[2]);
+console.log("SWITCH 1st and 3rd");
+console.log(list.toArray());
+list.addBetween(list.toArray()[0], list.toArray()[1], 60);
+console.log("ADD 60 between 1st and 2nd");
+console.log(list.toArray());
+list.switchPositions(list.toArray()[1], list.toArray()[5]);
+console.log("SWITCH 3rd and 6th");
+console.log(list.toArray());
+list.remove("pierwszy");
+console.log("REMOVE 'pierwszy'");
+console.log(list.toArray());
+list.switchPositions(list.toArray()[0], list.toArray()[6]);
+console.log("SWITCH 1st and last");
+console.log(list.toArray());
+list.remove(1);
+console.log("REMOVE 1st");
+console.log(list.toArray());
+list.addBetween(list.toArray()[1], list.toArray()[3], 71);
+console.log("ADD between 2nd and 4th");
+console.log(list.toArray());
+list.reverse();
+console.log("REVERSE");
+console.log(list.toArray());
 
 // TESTING REMOVE FUNCTION
 // list.remove(1)
@@ -30,6 +64,7 @@ list.addToTail(99);
 // TESTING SWITCH POSITIONS FUNCTION
 // list.switchPositions(list.toArray()[0],list.toArray()[2])
 // console.log(list.toArray())
+// console.log(list.toArray().length)
 // list.switchPositions(list.toArray()[1],list.toArray()[2])
 // console.log(list.toArray())
 // list.switchPositions(list.toArray()[3],list.toArray()[4])

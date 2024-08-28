@@ -22,7 +22,7 @@ export class LinkedList {
 
   toArray() {
     let currentMember = this.#head;
-    const array = [];
+    let array = [];
     while (currentMember !== null) {
       array.push(currentMember);
       currentMember = currentMember.nextMember;
