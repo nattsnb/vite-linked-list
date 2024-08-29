@@ -65,73 +65,94 @@ export class LinkedList {
   switchPositions(leftElement, rightElement) {
     if (this.#head !== this.#tail && leftElement && rightElement) {
       if (leftElement === this.#head && rightElement === this.#tail) {
-        const savedRightElementPreviousMember = rightElement.previousMember;
-        rightElement.previousMember = null;
-        rightElement.nextMember = leftElement.nextMember;
-        rightElement.nextMember.previousMember = rightElement;
-        leftElement.nextMember = null;
-        leftElement.previousMember = savedRightElementPreviousMember;
-        leftElement.previousMember.nextMember = leftElement;
-        this.#head = rightElement;
-        this.#tail = leftElement;
+        this.switchHeadAndTail(rightElement, leftElement);
       } else if (
         leftElement === this.#head &&
         leftElement.nextMember === rightElement
       ) {
-        leftElement.nextMember = rightElement.nextMember;
-        rightElement.nextMember.previousMember = leftElement;
-        leftElement.previousMember = rightElement;
-        rightElement.previousMember = null;
-        rightElement.nextMember = leftElement;
-        this.#head = rightElement;
+        this.switchHeadAndNext(leftElement, rightElement);
       } else if (leftElement === this.#head) {
-        const savedLeftElementNextMember = leftElement.nextMember;
-        leftElement.nextMember = rightElement.nextMember;
-        leftElement.nextMember.previousMember = rightElement;
-        leftElement.previousMember = rightElement.previousMember;
-        leftElement.previousMember.nextMember = leftElement;
-        rightElement.previousMember = null;
-        rightElement.nextMember = savedLeftElementNextMember;
-        this.#head = rightElement;
+        this.switchHeadAndOther(leftElement, rightElement);
       } else if (
         rightElement === this.#tail &&
         leftElement.nextMember === rightElement
       ) {
-        leftElement.previousMember.nextMember = rightElement;
-        rightElement.nextMember = leftElement;
-        rightElement.previousMember = leftElement.previousMember;
-        leftElement.previousMember = rightElement;
-        leftElement.nextMember = null;
-        this.#tail = leftElement;
+        this.switchTailAndNext(leftElement, rightElement);
       } else if (rightElement === this.#tail) {
-        const savedRightElementPreviousMember = rightElement.previousMember;
-        rightElement.previousMember = leftElement.previousMember;
-        leftElement.previousMember.nextMember = rightElement;
-        rightElement.nextMember = leftElement.nextMember;
-        leftElement.nextMember.previousMember = rightElement;
-        leftElement.nextMember = null;
-        leftElement.previousMember = savedRightElementPreviousMember;
-        savedRightElementPreviousMember.nextMember = leftElement;
+        this.switchTailAndOther(leftElement, rightElement);
       } else if (leftElement.nextMember === rightElement) {
-        rightElement.nextMember.previousMember = leftElement;
-        leftElement.previousMember.nextMember = rightElement;
-        rightElement.previousMember = leftElement.previousMember;
-        leftElement.nextMember = rightElement.nextMember;
-        leftElement.previousMember = rightElement;
-        rightElement.nextMember = leftElement;
+        this.switchAnyWithNext(leftElement, rightElement);
       } else {
-        rightElement.nextMember.previousMember = leftElement;
-        rightElement.previousMember.nextMember = leftElement;
-        leftElement.nextMember.previousMember = rightElement;
-        leftElement.previousMember.nextMember = rightElement;
-        const rightElementPreviousMemberSaved = rightElement.previousMember;
-        const leftElementNextMemberSaved = leftElement.nextMember;
-        rightElement.previousMember = leftElement.previousMember;
-        leftElement.nextMember = rightElement.nextMember;
-        leftElement.previousMember = rightElementPreviousMemberSaved;
-        rightElement.nextMember = leftElementNextMemberSaved;
+        this.switchAny(leftElement, rightElement);
       }
     }
+  }
+  switchAny(leftElement, rightElement) {
+    rightElement.nextMember.previousMember = leftElement;
+    rightElement.previousMember.nextMember = leftElement;
+    leftElement.nextMember.previousMember = rightElement;
+    leftElement.previousMember.nextMember = rightElement;
+    const rightElementPreviousMemberSaved = rightElement.previousMember;
+    const leftElementNextMemberSaved = leftElement.nextMember;
+    rightElement.previousMember = leftElement.previousMember;
+    leftElement.nextMember = rightElement.nextMember;
+    leftElement.previousMember = rightElementPreviousMemberSaved;
+    rightElement.nextMember = leftElementNextMemberSaved;
+  }
+  switchAnyWithNext(leftElement, rightElement) {
+    rightElement.nextMember.previousMember = leftElement;
+    leftElement.previousMember.nextMember = rightElement;
+    rightElement.previousMember = leftElement.previousMember;
+    leftElement.nextMember = rightElement.nextMember;
+    leftElement.previousMember = rightElement;
+    rightElement.nextMember = leftElement;
+  }
+  switchTailAndOther(leftElement, rightElement) {
+    const savedRightElementPreviousMember = rightElement.previousMember;
+    rightElement.previousMember = leftElement.previousMember;
+    leftElement.previousMember.nextMember = rightElement;
+    rightElement.nextMember = leftElement.nextMember;
+    leftElement.nextMember.previousMember = rightElement;
+    leftElement.nextMember = null;
+    leftElement.previousMember = savedRightElementPreviousMember;
+    savedRightElementPreviousMember.nextMember = leftElement;
+  }
+  switchTailAndNext(leftElement, rightElement) {
+    leftElement.previousMember.nextMember = rightElement;
+    rightElement.nextMember = leftElement;
+    rightElement.previousMember = leftElement.previousMember;
+    leftElement.previousMember = rightElement;
+    leftElement.nextMember = null;
+    this.#tail = leftElement;
+  }
+  switchHeadAndOther(leftElement, rightElement) {
+    const savedLeftElementNextMember = leftElement.nextMember;
+    leftElement.nextMember = rightElement.nextMember;
+    leftElement.nextMember.previousMember = rightElement;
+    leftElement.previousMember = rightElement.previousMember;
+    leftElement.previousMember.nextMember = leftElement;
+    rightElement.previousMember = null;
+    rightElement.nextMember = savedLeftElementNextMember;
+    this.#head = rightElement;
+  }
+  switchHeadAndNext(leftElement, rightElement) {
+    leftElement.nextMember = rightElement.nextMember;
+    rightElement.nextMember.previousMember = leftElement;
+    leftElement.previousMember = rightElement;
+    rightElement.previousMember = null;
+    rightElement.nextMember = leftElement;
+    this.#head = rightElement;
+  }
+  switchHeadAndTail(rightElement, leftElement) {
+    const savedRightElementPreviousMember = rightElement.previousMember;
+    rightElement.previousMember = null;
+    rightElement.nextMember = leftElement.nextMember;
+    rightElement.nextMember.previousMember = rightElement;
+    leftElement.nextMember = null;
+    leftElement.previousMember = savedRightElementPreviousMember;
+    leftElement.previousMember.nextMember = leftElement;
+    this.#head = rightElement;
+    this.#tail = leftElement;
   }
   addBetween(previousElement, nextElement, value) {
     if (
